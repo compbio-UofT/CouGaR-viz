@@ -1,7 +1,7 @@
 CouGaR-viz
 ==========
 
-This is a visualization package for laying out complex genomic rearrangements. More specifically focusing on those occuring in amplified regions.
+This is a visualization package for laying out complex genomic rearrangements. More specifically focusing on those occuring in amplified regions. Special thanks to Gary Baumgartner (@gfb) for helping get it started in Racket.
 
 Running
 -----------
