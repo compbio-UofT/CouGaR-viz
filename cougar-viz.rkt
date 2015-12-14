@@ -28,18 +28,23 @@
 (define-values (gene-forward-colour gene-reverse-colour) (values (make-color 133 160 0) (make-color 210 53 210)))
 (define-values (gene-tail-length gene-tail-height) (values 20 (/ gene-track-height 3)))
 
-(displayln "gene annotations file:")
-(define gene-list-file (read-line))
+(define args (current-command-line-arguments))
+(cond 
+  [(not (equal? (vector-length args) 3)) (displayln "cougar-viz.rkt gene_annotations_file genomic-somatic_regions_file svg_out_filename") (exit 1) ]
+  ) 
 
-(displayln "Genomic-Somatic data file name:")
-(define data-file-name (read-line))
+(define-values (gene-list-file data-file-name output-file-name) (values (vector-ref args 0) (vector-ref args 1) (vector-ref args 2)))
+
+
+
+(displayln (string-append "gene annotations file:" gene-list-file))
+;(define gene-list-file (read-line))
+
+(displayln (string-append "Genomic-Somatic data file name:" data-file-name))
+;(define data-file-name (read-line))
 (define-values (genomic somatic)
   (with-input-from-file data-file-name (λ () (values (read) (read)))))
-(displayln "SVG file name [no suffix, and blank appends \".svg\" to data file name]:")
-(define output-file-name
-  (let ([svg-file-name (string-trim (read-line))])
-    (string-append (if (equal? "" svg-file-name) data-file-name svg-file-name)
-                   ".svg")))
+(displayln (string-append "svg output filename is: " output-file-name))
 
 (define (interval-positive a)
   (<= (second a) (third a)))   
@@ -142,9 +147,10 @@
 (define g-lines (sort (prune-reversed (lines d)) << #:key first))
 
 
-(require slideshow slideshow/code)
-(current-font-size node-scale)
+#(require slideshow slideshow/code)
+#(current-font-size node-scale)
 
+(require pict)
 (require unstable/gui/pict)
 (define (back pict back-color) 
   (cc-superimpose (color back-color (filled-rectangle (+ 2 (pict-width pict))
