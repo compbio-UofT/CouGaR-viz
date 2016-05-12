@@ -32,6 +32,16 @@ Output image
 -----------
 The output image produced is an SVG format image depicting the genomic regions and somatic linkings as a graph structure. The width of edges will be proportional to the log of the copy count in the input file. Genes are annotated on genomic intervals and are coloured for positive (green'ish) and negative (purple) strand genes.
 
+Red lines represent parts of the reference genome and the thickness of the red line is proportional to the log predicted copy count. Blue lines represent tumor adjacencies and the thickness of the blue lines is proportional to the log predicted copy count of the tumor adjacency in the tumor genome. The copy counts for the tumor adjacencies represents the number of times the two regions appear adjacent in the tumor genome. 
+
+The direction of the arrows connecting the adjacency represents the strand connectivity.  
+`>-->`  there is no change of strand through the adjacency  
+`>--<`  the adjacency can only be traversed from the left breakpoint on the positive strand or the right breakpoint on the negative strand  
+`<-->`  the adjacency can only be traversed from the left breakpoint on the negative strand or the right breakpoint on the positive strand  
+
+The numbers on the red line represent length of the genomic interval. The numbers above the red line is the predicted copy count of the region in the tumor genome. The images are not to genomic scale as it was impossible to keep genomic scale and still represent these graphs in a reasonable format..
+
+
 Genomic intervals are laid out in order of appearance in the genome (i.e. , chr5:5,000 before chr:7,000 and chr2 before chr3).
 
 
